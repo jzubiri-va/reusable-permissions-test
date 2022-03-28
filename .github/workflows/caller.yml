@@ -6,4 +6,4 @@ on:
 jobs:
   name: Call Authentication Workflow
   call-authentication-check:
-    uses: jzubiri-va/reusable-permissions-test/.github/workflows/pipeline.yml
+    uses: jzubiri-va/reusable-permissions-test/.github/workflows/pipeline.yml@main
