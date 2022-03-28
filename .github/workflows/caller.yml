@@ -2,8 +2,14 @@ name: Test authentication
 
 on:
   workflow_dispatch:
+    inputs:
+      username:
+        required: true
+  
 
 jobs:
   call-authentication-check:
     name: Call Authentication Workflow
     uses: jzubiri-va/reusable-permissions-test/.github/workflows/pipeline.yml@main
+    with:
+      username: ${{ github.event.inputs.username }}
