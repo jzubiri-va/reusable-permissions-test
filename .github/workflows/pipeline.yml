@@ -13,5 +13,5 @@ jobs:
         run: |
           echo "You are ${{ github.actor }}"
           curl -w "%{http_code}\n" -X GET \     
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/orgs/department-of-veterans-affairs/members/${{ github.actor }}"
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/orgs/department-of-veterans-affairs/members/${{ github.actor }}"
