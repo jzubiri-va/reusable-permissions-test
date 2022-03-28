@@ -6,10 +6,12 @@ on:
 jobs:
   check-user:
     runs-on: ubuntu-latest
+    env:
+      USER: ${{ github.actor }}
     steps:
       - name: Check user access
         run: |
           echo "You are ${{ github.actor }}"
           curl -w "%{http_code}\n" -X GET \     
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/orgs/department-of-veterans-affairs/members/${{ github.actor }}
+            https://api.github.com/orgs/department-of-veterans-affairs/members/$USER
