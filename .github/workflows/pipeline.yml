@@ -11,7 +11,7 @@ jobs:
   check-user:
     runs-on: ubuntu-latest
     env:
-      USER: ${{ github.actor }}
+      USER: ${{ github.event.inputs.username }}
     steps:
       - name: Check user access
         run: |
