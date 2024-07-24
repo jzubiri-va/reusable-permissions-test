@@ -1,0 +1,29 @@
+name: Prisma Test
+on: 
+  push:
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: vulnerables/web-dvwa:${{ github.sha }}
+  IMAGE_PATH: .
+
+jobs:
+  checkov-image-scan:
+    runs-on: ubuntu-latest
+    name: checkov-image-scan
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Build the image
+        run: docker build -t ${{ env.IMAGE_NAME }} ${{ env.IMAGE_PATH }} -f Dockerfile-busybox
+
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        env:
+          PRISMA_API_URL: https://api.prismacloud.io
+        with:
+          docker_image: ${{ env.IMAGE_NAME }} # define the name of the image to scan
+          dockerfile_path: ${{ format('{0}/Dockerfile-busybox', env.IMAGE_PATH) }} # path to the Dockerfile
+          api-key: ${{ secrets.BC_API_KEY }} # Bridgecrew API key stored as a GitHub secret
